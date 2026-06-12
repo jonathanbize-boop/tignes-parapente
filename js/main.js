@@ -83,6 +83,27 @@
     });
   });
 
+  /* Pré-remplissage du formulaire de contact depuis l'URL
+     (ex. contact.html?vol=Vol%20Découverte&cadeau=1#reservation) */
+  var volSelect = document.getElementById("f-vol");
+  if (volSelect) {
+    var params = new URLSearchParams(window.location.search);
+    var vol = params.get("vol");
+    var isGift = params.get("cadeau") === "1";
+    if (vol) {
+      Array.prototype.forEach.call(volSelect.options, function (opt) {
+        if (opt.text.indexOf(vol) === 0) { volSelect.value = opt.value || opt.text; opt.selected = true; }
+      });
+    }
+    if (isGift) {
+      var msg = document.getElementById("f-msg");
+      if (msg && !msg.value) {
+        msg.value = "Bonjour, je souhaite offrir ce vol en bon cadeau" +
+          (vol ? " (" + vol + ")" : "") + ".";
+      }
+    }
+  }
+
   /* Formulaires (sans backend) : ouverture du mail pré-rempli */
   document.querySelectorAll("form[data-mailto]").forEach(function (form) {
     form.addEventListener("submit", function (e) {
