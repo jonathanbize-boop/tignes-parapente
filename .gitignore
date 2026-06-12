@@ -1,0 +1,9 @@
+# Fichiers de travail (pas nécessaires en ligne)
+_scrape/
+assets/
+.claude/
+logo 3_0 blanc.avif
+
+# Système
+Thumbs.db
+.DS_Store

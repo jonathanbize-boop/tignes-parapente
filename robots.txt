@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /_scrape/
+Disallow: /assets/
+
+Sitemap: https://www.tignes-parapente.com/sitemap.xml
