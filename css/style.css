@@ -461,6 +461,64 @@ h3 { font-size: clamp(1.35rem, 2.6vw, 1.8rem); }
   transform: rotate(2.5deg); box-shadow: 0 16px 40px -12px rgba(0,0,0,.4);
 }
 
+/* ---------- Formulaire de commande (bon cadeau) ---------- */
+.order-card {
+  background: #fff; color: var(--text);
+  max-width: 46rem; margin-inline: auto;
+  border-radius: var(--radius); padding: clamp(1.6rem, 4vw, 2.4rem);
+  box-shadow: var(--shadow-lg); border-top: 6px solid var(--rouge);
+}
+.order-actions { margin-top: 1.4rem; display: grid; gap: .8rem; justify-items: center; }
+.order-actions .btn { width: 100%; max-width: 24rem; }
+.order-note {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-size: .85rem; color: var(--text-soft); text-align: center; line-height: 1.4;
+}
+.order-note svg { width: 1.1rem; height: 1.1rem; flex: none; color: var(--sky-deep); }
+.order-error {
+  color: var(--rouge); font-weight: 600; font-size: .95rem; text-align: center;
+  background: #FDECEA; border: 1px solid #F5B5AE; border-radius: var(--radius-sm);
+  padding: .6rem .9rem; width: 100%; max-width: 24rem;
+}
+.order-steps {
+  list-style: none; padding: 0; margin: 2.2rem auto 0; max-width: 46rem;
+  display: grid; gap: .8rem;
+}
+@media (min-width: 48rem) { .order-steps { grid-template-columns: repeat(3, 1fr); } }
+.order-steps li {
+  display: flex; align-items: center; gap: .7rem;
+  color: rgba(255,255,255,.9); font-weight: 600; font-size: .95rem;
+}
+.order-steps span {
+  flex: none; display: grid; place-items: center;
+  width: 2rem; height: 2rem; border-radius: 50%;
+  background: var(--sun); color: var(--night);
+  font-family: var(--font-display); font-style: italic; font-weight: 700;
+}
+
+/* ---------- Page de vérification d'un bon ---------- */
+.verify-card {
+  background: #fff; border-radius: var(--radius);
+  box-shadow: var(--shadow); padding: 1.6rem 1.5rem;
+  border-left: 6px solid var(--border);
+}
+.verify-card.verify-loading { color: var(--text-soft); }
+.verify-card.verify-ok { border-left-color: #16A34A; }
+.verify-card.verify-used { border-left-color: var(--sun); }
+.verify-card.verify-bad { border-left-color: var(--rouge); }
+.verify-badge {
+  font-family: var(--font-display); font-style: italic; font-weight: 700;
+  text-transform: uppercase; font-size: 1.5rem; margin-bottom: .8rem;
+}
+.verify-ok .verify-badge { color: #16A34A; }
+.verify-used .verify-badge { color: #B45309; }
+.verify-bad .verify-badge { color: var(--rouge); }
+.verify-card dl {
+  display: grid; grid-template-columns: auto 1fr; gap: .35rem 1rem; margin: 0;
+}
+.verify-card dt { color: var(--text-soft); font-size: .9rem; }
+.verify-card dd { margin: 0; font-weight: 600; }
+
 /* ---------- Page vol (détail) ---------- */
 .page-hero {
   position: relative; min-height: 62svh; display: grid; align-items: end;

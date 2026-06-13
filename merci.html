@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Merci ! Votre bon cadeau est en route | Tignes Parapente</title>
+  <meta name="description" content="Merci pour votre achat. Votre bon cadeau Tignes Parapente, avec son QR code, vous est envoyé par email.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <meta name="theme-color" content="#0B1B2B">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,600;1,700&family=Barlow:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="Tignes Parapente — accueil">
+        <img src="img/logo-tignes-parapente-blanc.png" alt="" width="48" height="48">
+        <span class="brand-name">Tignes<small>Parapente</small></span>
+      </a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="main-nav" id="main-nav" aria-label="Navigation principale">
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="index.html#vols">Nos vols</a></li>
+          <li><a href="bon-cadeau.html">Bon cadeau</a></li>
+          <li><a href="videos.html">Vidéos</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="contact.html">Contact &amp; Accès</a></li>
+          <li class="nav-cta"><a class="btn btn-primary" href="tel:+33660996808">Réserver</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenu">
+    <section class="page-hero" style="min-height:46svh">
+      <div class="hero-media">
+        <img src="img/vol-parapente-enfant-sourire-tignes.webp" alt="" fetchpriority="high">
+      </div>
+      <div class="container hero-content">
+        <p class="kicker">Paiement confirmé</p>
+        <h1>Merci, <span class="accent">ça vole&nbsp;!</span></h1>
+        <p class="lead" id="merci-lead">Votre bon cadeau est généré et vous est envoyé par e-mail à l'instant.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container legal-content" style="text-align:center">
+        <h2>Et maintenant&nbsp;?</h2>
+        <ul class="checklist" style="display:inline-grid;text-align:left;margin-inline:auto">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Vérifiez votre boîte mail : le bon cadeau (PDF avec QR code) y est en pièce jointe.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Imprimez-le ou transférez-le à l'heureux bénéficiaire.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Pour voler, il suffira de nous appeler avec le numéro du bon pour réserver un créneau.</span></li>
+        </ul>
+        <p style="color:var(--text-soft);margin-top:1.4rem">Pas reçu l'email sous quelques minutes ? Pensez à regarder vos spams, ou
+          <a href="contact.html#reservation" style="color:var(--sky-deep);font-weight:600">contactez-nous</a>.</p>
+        <div class="mt-5">
+          <a class="btn btn-primary" href="index.html">Retour à l'accueil</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom" style="border:0;justify-content:center">
+        <p>© 2026 Tignes Parapente — <a href="mentions-legales.html">Mentions légales</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+  <script>
+    (function () {
+      var sid = new URLSearchParams(location.search).get("sid");
+      if (!sid) return;
+      fetch("/api/session?sid=" + encodeURIComponent(sid))
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          if (d && d.recipientName) {
+            var lead = document.getElementById("merci-lead");
+            if (lead) lead.textContent =
+              "Le bon cadeau pour " + d.recipientName + " est généré et vous est envoyé par e-mail à l'instant.";
+          }
+        })
+        .catch(function () {});
+    })();
+  </script>
+</body>
+</html>

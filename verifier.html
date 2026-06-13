@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vérification d'un bon cadeau | Tignes Parapente</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <meta name="theme-color" content="#0B1B2B">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,600;1,700&family=Barlow:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header is-scrolled" style="position:static">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="Tignes Parapente — accueil">
+        <img src="img/logo-tignes-parapente-blanc.png" alt="" width="48" height="48">
+        <span class="brand-name">Tignes<small>Parapente</small></span>
+      </a>
+    </div>
+  </header>
+
+  <main id="contenu" class="section">
+    <div class="container" style="max-width:36rem">
+      <div class="section-head" style="margin-bottom:1.5rem">
+        <p class="kicker">Espace moniteur</p>
+        <h1 style="font-size:clamp(2rem,6vw,2.8rem)">Vérifier un bon</h1>
+      </div>
+
+      <div id="verify-state" class="verify-card verify-loading">
+        <p>Vérification en cours…</p>
+      </div>
+
+      <!-- Saisie manuelle (si pas de QR scanné) -->
+      <form id="manual-form" class="order-card" style="margin-top:1.5rem;border-top-color:var(--sky)" hidden>
+        <div class="field">
+          <label for="m-link">Coller le lien du QR code</label>
+          <input id="m-link" type="text" inputmode="url" placeholder="https://…/verifier.html?c=TP-…&s=…">
+          <span class="hint">Scannez le QR code du bon avec l'appareil photo, ou collez son lien ici.</span>
+        </div>
+        <div class="order-actions" style="margin-top:1rem">
+          <button class="btn btn-secondary" type="submit">Vérifier</button>
+        </div>
+      </form>
+
+      <!-- Zone admin : marquer comme utilisé -->
+      <div id="admin-zone" class="order-card" style="margin-top:1.5rem" hidden>
+        <div class="field">
+          <label for="admin-token">Code administrateur</label>
+          <input id="admin-token" type="password" autocomplete="off" placeholder="Votre code admin">
+          <span class="hint">Mémorisé sur cet appareil pour les prochaines fois.</span>
+        </div>
+        <div class="order-actions" style="margin-top:1rem">
+          <button class="btn btn-primary" id="redeem-btn" type="button">Marquer comme utilisé</button>
+          <p class="order-error" id="redeem-error" role="alert" hidden></p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom" style="border:0;justify-content:center">
+        <p>© 2026 Tignes Parapente</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/verifier.js" defer></script>
+</body>
+</html>

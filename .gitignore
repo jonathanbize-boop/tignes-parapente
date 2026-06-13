@@ -4,6 +4,13 @@ assets/
 .claude/
 logo 3_0 blanc.avif
 
+# Node / Vercel / secrets
+node_modules/
+.vercel/
+.env
+.env.local
+.env*.local
+
 # Système
 Thumbs.db
 .DS_Store

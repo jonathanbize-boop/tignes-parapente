@@ -1,0 +1,15 @@
+{
+  "name": "tignes-parapente",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Site Tignes Parapente + vente en ligne de bons cadeaux (Stripe, QR, PDF)",
+  "engines": { "node": ">=18" },
+  "dependencies": {
+    "@neondatabase/serverless": "^0.10.4",
+    "pdfkit": "^0.15.1",
+    "qrcode": "^1.5.4",
+    "resend": "^4.0.1",
+    "stripe": "^17.5.0"
+  }
+}
