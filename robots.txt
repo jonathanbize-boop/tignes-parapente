@@ -1,5 +1,28 @@
+# Tignes Parapente — robots.txt
+# Résumé structuré pour les assistants IA : https://www.tignes-parapente.com/llms.txt
+
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /_scrape/
+Disallow: /assets/
+
+# Assistants IA & moteurs de recherche génératifs — explicitement autorisés
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-User
+User-agent: Claude-SearchBot
+User-agent: anthropic-ai
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: Bingbot
+User-agent: CCBot
+Allow: /
+Disallow: /api/
 Disallow: /_scrape/
 Disallow: /assets/
 
