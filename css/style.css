@@ -89,7 +89,7 @@ h3 { font-size: clamp(1.35rem, 2.6vw, 1.8rem); }
 }
 .lead { font-size: clamp(1.1rem, 1.8vw, 1.3rem); color: var(--text-soft); }
 .accent { color: var(--rouge); }
-.accent-sky { color: var(--sky); }
+.accent-sky { color: var(--sky-deep); } /* bleu foncé : contraste suffisant sur fond clair */
 
 .container { width: min(100% - 2.5rem, var(--container)); margin-inline: auto; }
 .section { padding-block: clamp(3.5rem, 8vw, 6.5rem); }
