@@ -187,17 +187,39 @@ h3 { font-size: clamp(1.35rem, 2.6vw, 1.8rem); }
 .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
 @media (max-width: 64rem) {
-  .nav-toggle { display: flex; }
+  .nav-toggle { display: flex; position: relative; z-index: 2; }
   .main-nav {
-    position: fixed; inset: 0; z-index: -1;
-    display: grid; place-items: center;
-    background: linear-gradient(160deg, var(--night) 0%, var(--sky-deep) 130%);
-    opacity: 0; visibility: hidden; transition: opacity .3s var(--ease), visibility .3s;
+    position: fixed; inset: 0; z-index: 90;
+    display: grid; align-content: center; justify-items: center;
+    padding: 5.5rem 1.5rem calc(2rem + env(safe-area-inset-bottom));
+    background: linear-gradient(165deg, var(--night) 0%, var(--sky-deep) 145%);
+    overflow-y: auto;
+    opacity: 0; visibility: hidden; transform: translateY(-10px);
+    transition: opacity .3s var(--ease), visibility .3s, transform .35s var(--ease);
   }
-  .main-nav.is-open { opacity: 1; visibility: visible; z-index: 90; }
-  .main-nav ul { flex-direction: column; gap: 1rem; text-align: center; }
-  .main-nav a { font-size: 1.9rem; }
-  .nav-cta { margin: 1rem 0 0; }
+  .main-nav.is-open { opacity: 1; visibility: visible; transform: none; }
+  .main-nav ul { flex-direction: column; gap: .25rem; text-align: center; width: 100%; max-width: 22rem; }
+  .main-nav li { width: 100%; }
+  .main-nav a { display: block; font-size: 1.55rem; padding: .75rem 1rem; }
+  .main-nav a:hover { transform: none; }
+  .main-nav a[aria-current="page"]::after { width: 2.6rem; margin-inline: auto; }
+  .nav-cta { margin: 1.3rem 0 0; width: 100%; max-width: 22rem; }
+  .main-nav .nav-cta .btn { width: 100%; min-height: 3.5rem; font-size: 1.3rem; }
+
+  /* Sur mobile, pas de backdrop-filter sur le header :
+     il créerait un bloc englobant qui empêcherait le menu fixe de couvrir l'écran. */
+  .site-header, .site-header.is-scrolled { backdrop-filter: none; }
+
+  /* Quand le menu est ouvert */
+  body.nav-open { overflow: hidden; }
+  body.nav-open .site-header {
+    background: rgba(11,27,43,.96);
+    box-shadow: 0 8px 30px -12px rgba(0,0,0,.4);
+  }
+  body.nav-open .mobile-cta,
+  body.nav-open .altimeter {
+    opacity: 0; visibility: hidden; pointer-events: none;
+  }
 }
 
 /* ---------- Héro ---------- */
@@ -269,58 +291,6 @@ h3 { font-size: clamp(1.35rem, 2.6vw, 1.8rem); }
 }
 .hero-scroll svg { width: 1.3rem; height: 1.3rem; animation: bob 1.8s var(--ease) infinite; }
 @keyframes bob { 0%,100% { transform: translateY(0);} 50% { transform: translateY(7px);} }
-
-/* ---------- Bandes défilantes croisées ---------- */
-.marquee-zone {
-  position: relative; z-index: 3;
-  padding-block: 1.6rem 2.2rem; overflow: hidden;
-  margin-top: -1.4rem;
-}
-.marquee {
-  overflow: hidden; padding-block: .85rem;
-  font-family: var(--font-display); font-style: italic; font-weight: 700;
-  text-transform: uppercase; letter-spacing: .06em;
-  font-size: clamp(1.5rem, 3.2vw, 2.3rem);
-}
-.marquee--sun {
-  position: absolute; left: -2%; right: -2%; top: 50%;
-  background: var(--sun); color: var(--night);
-  transform: translateY(-50%) rotate(2.6deg);
-  box-shadow: 0 16px 40px -18px rgba(0,0,0,.35);
-}
-.marquee--red {
-  position: relative; z-index: 2; left: -2%;
-  width: 104%;
-  background: var(--rouge); color: #fff;
-  transform: rotate(-1.8deg);
-  box-shadow: 0 18px 44px -16px rgba(232, 64, 44, .55);
-}
-.marquee-track {
-  display: flex; align-items: center; gap: 2.2rem; width: max-content;
-  animation: slide 26s linear infinite;
-  white-space: nowrap;
-}
-.marquee--sun .marquee-track { animation: slide-back 34s linear infinite; }
-.marquee:hover .marquee-track { animation-play-state: paused; }
-.mq-word { display: inline-block; }
-.mq-word.is-outline {
-  color: transparent;
-  -webkit-text-stroke: 1.6px currentcolor;
-  -webkit-text-stroke-color: #fff;
-}
-.marquee--sun .mq-word.is-outline { -webkit-text-stroke-color: var(--night); }
-.mq-ico {
-  width: 1.6em; height: 1.6em; flex: none;
-  transform: rotate(-6deg);
-  animation: ico-wobble 2.6s ease-in-out infinite;
-}
-.marquee-track .mq-ico:nth-of-type(odd) { animation-delay: -1.3s; }
-@keyframes slide { to { transform: translateX(-50%); } }
-@keyframes slide-back { from { transform: translateX(-50%); } to { transform: translateX(0); } }
-@keyframes ico-wobble {
-  0%, 100% { transform: rotate(-8deg) translateY(0); }
-  50% { transform: rotate(8deg) translateY(-3px); }
-}
 
 /* ---------- Cartes de vols ---------- */
 .flights-grid {
@@ -599,7 +569,24 @@ h3 { font-size: clamp(1.35rem, 2.6vw, 1.8rem); }
 .mobile-cta .btn { flex: 1; min-height: 3rem; font-size: 1.1rem; padding-inline: .8rem; }
 @media (max-width: 48rem) {
   .mobile-cta { display: flex; }
-  body { padding-bottom: 4.6rem; }
+  .mobile-cta .btn { font-size: 1.05rem; }
+  body { padding-bottom: 4.8rem; }
+
+  /* Héro plus aéré, un seul bouton, pas de collision avec la barre du bas */
+  .hero { min-height: 90svh; }
+  .hero-content { padding-block: 5.5rem 6.5rem; gap: 1.05rem; }
+  .hero h1, .page-hero h1 { font-size: 2.6rem; }
+  .hero .lead { font-size: 1.02rem; }
+  .hero-badges { gap: .4rem; }
+  .chip { font-size: .82rem; padding: .34rem .75rem; }
+  .hero-ctas { flex-direction: column; align-items: stretch; gap: .65rem; width: 100%; max-width: 21rem; margin-top: .2rem; }
+  .hero-ctas .btn { width: 100%; }
+  .hero-ctas .btn-ghost-light { display: none; } /* "Offrir un vol" reste accessible via le menu, la section cadeau et le pied de page */
+  .hero-scroll { display: none; }
+
+  /* Pages intérieures : héro un peu plus court */
+  .page-hero { min-height: 56svh; }
+  .page-hero .hero-content { padding-block: 6.5rem 2.5rem; }
 }
 
 /* ---------- Footer ---------- */

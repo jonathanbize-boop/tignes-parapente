@@ -19,20 +19,20 @@
     toggle.addEventListener("click", function () {
       var open = nav.classList.toggle("is-open");
       toggle.setAttribute("aria-expanded", open ? "true" : "false");
-      document.body.style.overflow = open ? "hidden" : "";
+      document.body.classList.toggle("nav-open", open);
     });
     nav.addEventListener("click", function (e) {
       if (e.target.closest("a")) {
         nav.classList.remove("is-open");
         toggle.setAttribute("aria-expanded", "false");
-        document.body.style.overflow = "";
+        document.body.classList.remove("nav-open");
       }
     });
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape" && nav.classList.contains("is-open")) {
         nav.classList.remove("is-open");
         toggle.setAttribute("aria-expanded", "false");
-        document.body.style.overflow = "";
+        document.body.classList.remove("nav-open");
         toggle.focus();
       }
     });
