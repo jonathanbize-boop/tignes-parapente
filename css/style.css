@@ -582,15 +582,16 @@ h3 { font-size: clamp(1.35rem, 2.6vw, 1.8rem); }
   .mobile-cta .btn { font-size: 1.05rem; }
   body { padding-bottom: 4.8rem; }
 
-  /* Héro épuré : pas de bouton (les vols sont juste en dessous + barre Appeler/Réserver) */
-  .hero { min-height: 80svh; }
-  .hero-content { padding-block: 5rem 5.5rem; gap: 1rem; }
+  /* Héro plein écran, sans bouton : un indice "On décolle" invite à descendre vers les vols */
+  .hero { min-height: 100svh; }
+  .hero-content { padding-block: 5rem 9rem; gap: 1rem; }
   .hero h1, .page-hero h1 { font-size: 2.6rem; }
   .hero .lead { font-size: 1.02rem; }
   .hero-badges { gap: .4rem; margin-top: .2rem; }
   .chip { font-size: .82rem; padding: .34rem .75rem; }
   .hero-ctas { display: none; } /* boutons accessibles via la barre du bas, le menu et la section cadeau */
-  .hero-scroll { display: none; }
+  /* l'indice de scroll remonte juste au-dessus de la barre Appeler/Réserver */
+  .hero-scroll { display: grid; bottom: calc(5.2rem + env(safe-area-inset-bottom)); }
 
   /* Pages intérieures : héro un peu plus court */
   .page-hero { min-height: 56svh; }
