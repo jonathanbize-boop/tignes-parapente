@@ -250,7 +250,7 @@ h3 { font-size: clamp(1.35rem, 2.6vw, 1.8rem); }
   text-shadow: 0 2px 4px rgba(7,18,30,.55), 0 8px 32px rgba(7,18,30,.55);
 }
 .hero .lead, .page-hero .lead, .hero .kicker, .page-hero .kicker, .breadcrumb {
-  text-shadow: 0 1px 3px rgba(7,18,30,.6);
+  text-shadow: 0 1px 2px rgba(7,18,30,.85), 0 2px 14px rgba(7,18,30,.6);
 }
 .hero h1 .line { display: block; }
 .hero h1 .accent { color: var(--sun); }
@@ -468,8 +468,8 @@ h3 { font-size: clamp(1.35rem, 2.6vw, 1.8rem); }
 }
 .page-hero .hero-media::after {
   background:
-    linear-gradient(95deg, rgba(11,27,43,.68) 0%, rgba(11,27,43,.34) 40%, rgba(11,27,43,0) 70%),
-    linear-gradient(180deg, rgba(11,27,43,.45) 0%, rgba(11,27,43,.12) 45%, rgba(11,27,43,.88) 100%);
+    linear-gradient(95deg, rgba(11,27,43,.72) 0%, rgba(11,27,43,.46) 45%, rgba(11,27,43,.18) 78%),
+    linear-gradient(180deg, rgba(11,27,43,.5) 0%, rgba(11,27,43,.32) 28%, rgba(11,27,43,.74) 62%, rgba(11,27,43,.93) 100%);
 }
 .page-hero .hero-content { padding-block: 7.5rem 3.5rem; }
 .page-hero h1 { font-size: clamp(2.6rem, 6.5vw, 4.8rem); }
