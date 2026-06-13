@@ -204,7 +204,7 @@ h3 { font-size: clamp(1.35rem, 2.6vw, 1.8rem); }
   .main-nav a:hover { transform: none; }
   .main-nav a[aria-current="page"]::after { width: 2.6rem; margin-inline: auto; }
   .nav-cta { margin: 1.3rem 0 0; width: 100%; max-width: 22rem; }
-  .main-nav .nav-cta .btn { width: 100%; min-height: 3.5rem; font-size: 1.3rem; }
+  .main-nav .nav-cta .btn { display: inline-flex; width: 100%; min-height: 3.5rem; font-size: 1.3rem; }
 
   /* Sur mobile, pas de backdrop-filter sur le header :
      il créerait un bloc englobant qui empêcherait le menu fixe de couvrir l'écran. */
@@ -468,8 +468,13 @@ h3 { font-size: clamp(1.35rem, 2.6vw, 1.8rem); }
   border-radius: var(--radius); padding: clamp(1.6rem, 4vw, 2.4rem);
   box-shadow: var(--shadow-lg); border-top: 6px solid var(--rouge);
 }
+/* La carte est blanche même dans une section sombre : on force les couleurs de texte. */
+.order-card p { color: var(--text); }
+.order-card .order-note { color: var(--text-soft); }
+.order-card .order-error { color: var(--rouge); }
 .order-actions { margin-top: 1.4rem; display: grid; gap: .8rem; justify-items: center; }
 .order-actions .btn { width: 100%; max-width: 24rem; }
+.btn .btn-label { text-align: center; }
 .order-note {
   display: inline-flex; align-items: center; gap: .5rem;
   font-size: .85rem; color: var(--text-soft); text-align: center; line-height: 1.4;
