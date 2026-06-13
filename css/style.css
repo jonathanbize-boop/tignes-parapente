@@ -582,9 +582,9 @@ h3 { font-size: clamp(1.35rem, 2.6vw, 1.8rem); }
   .mobile-cta .btn { font-size: 1.05rem; }
   body { padding-bottom: 4.8rem; }
 
-  /* Héro plein écran, sans bouton : un indice "On décolle" invite à descendre vers les vols */
-  .hero { min-height: 100svh; }
-  .hero-content { padding-block: 5rem 9rem; gap: 1rem; }
+  /* Héro plein écran : texte calé en haut pour laisser les visages bien visibles au centre */
+  .hero { min-height: 100svh; align-items: start; }
+  .hero-content { padding-block: 7rem 0; gap: .9rem; } /* dégage l'altimètre en haut à gauche */
   .hero h1, .page-hero h1 { font-size: 2.6rem; }
   .hero .lead { font-size: 1.02rem; }
   .hero-badges { gap: .4rem; margin-top: .2rem; }
