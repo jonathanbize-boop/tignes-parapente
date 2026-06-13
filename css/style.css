@@ -530,7 +530,7 @@ h3 { font-size: clamp(1.35rem, 2.6vw, 1.8rem); }
   position: relative; border-radius: var(--radius); overflow: hidden;
   box-shadow: var(--shadow-lg); background: var(--night);
 }
-.video-frame video { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
+.video-frame video, .video-frame iframe { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; border: 0; }
 .insta-grid { display: grid; gap: 1rem; grid-template-columns: repeat(2, 1fr); }
 @media (min-width: 48rem) { .insta-grid { grid-template-columns: repeat(4, 1fr); } }
 .insta-grid a {
