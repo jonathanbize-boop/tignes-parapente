@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://www.tignes-parapente.com/</loc><priority>1.0</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.tignes-parapente.com/vol-decouverte.html</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.tignes-parapente.com/vol-sensation.html</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.tignes-parapente.com/vol-enfant.html</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.tignes-parapente.com/vol-groupe.html</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.tignes-parapente.com/bon-cadeau.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.tignes-parapente.com/videos.html</loc><priority>0.6</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.tignes-parapente.com/faq.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.tignes-parapente.com/contact.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.tignes-parapente.com/mentions-legales.html</loc><priority>0.2</priority><changefreq>yearly</changefreq></url>
+  <url><loc>https://www.tignes-parapente.com/</loc><lastmod>2026-06-13</lastmod><priority>1.0</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.tignes-parapente.com/vol-decouverte.html</loc><lastmod>2026-06-13</lastmod><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.tignes-parapente.com/vol-sensation.html</loc><lastmod>2026-06-13</lastmod><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.tignes-parapente.com/vol-enfant.html</loc><lastmod>2026-06-13</lastmod><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.tignes-parapente.com/vol-groupe.html</loc><lastmod>2026-06-13</lastmod><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.tignes-parapente.com/bon-cadeau.html</loc><lastmod>2026-06-13</lastmod><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.tignes-parapente.com/videos.html</loc><lastmod>2026-06-13</lastmod><priority>0.6</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.tignes-parapente.com/faq.html</loc><lastmod>2026-06-13</lastmod><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.tignes-parapente.com/contact.html</loc><lastmod>2026-06-13</lastmod><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.tignes-parapente.com/mentions-legales.html</loc><lastmod>2026-06-13</lastmod><priority>0.2</priority><changefreq>yearly</changefreq></url>
 </urlset>
