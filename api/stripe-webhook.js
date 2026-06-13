@@ -68,31 +68,43 @@ export default async function handler(req, res) {
       return;
     }
 
+    // Le bon est désormais créé en base (consultable / vérifiable).
+    // L'envoi de l'email est "best-effort" : un échec n'invalide pas le bon.
     const base = process.env.PUBLIC_BASE_URL || `https://${req.headers.host}`;
     const verifyUrl = `${base}/verifier.html?c=${encodeURIComponent(code)}&s=${sign(code)}`;
 
-    const pdf = await buildVoucherPdf({
-      code,
-      flightName: f.name,
-      recipientName: s.metadata?.recipientName,
-      message: s.metadata?.message,
-      amount: s.amount_total,
-      verifyUrl,
-    });
+    let emailed = false;
+    let emailError = null;
+    try {
+      const pdf = await buildVoucherPdf({
+        code,
+        flightName: f.name,
+        recipientName: s.metadata?.recipientName,
+        message: s.metadata?.message,
+        amount: s.amount_total,
+        verifyUrl,
+      });
+      await sendVoucherEmail({
+        to: buyerEmail,
+        recipientName: s.metadata?.recipientName,
+        flightName: f.name,
+        code,
+        amount: s.amount_total,
+        pdf,
+      });
+      emailed = true;
+    } catch (mailErr) {
+      emailError = String(mailErr?.message || mailErr).slice(0, 480);
+      console.error('Webhook: email non envoyé pour', code, mailErr);
+    }
 
-    await sendVoucherEmail({
-      to: buyerEmail,
-      recipientName: s.metadata?.recipientName,
-      flightName: f.name,
-      code,
-      amount: s.amount_total,
-      pdf,
-    });
+    await sql`UPDATE vouchers SET emailed = ${emailed}, email_error = ${emailError} WHERE code = ${code}`;
 
-    res.status(200).json({ received: true, code });
+    // On répond toujours 200 : le bon existe, inutile que Stripe réessaie.
+    res.status(200).json({ received: true, code, emailed });
   } catch (e) {
-    // 500 → Stripe réessaiera l'évènement (utile en cas d'erreur transitoire DB/email).
-    console.error('Webhook: traitement échoué', e);
+    // 500 uniquement si la création même du bon a échoué (DB) → Stripe réessaiera.
+    console.error('Webhook: création du bon échouée', e);
     res.status(500).json({ error: 'processing_failed' });
   }
 }

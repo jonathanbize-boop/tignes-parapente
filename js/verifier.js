@@ -8,7 +8,9 @@
   var adminZone = document.getElementById("admin-zone");
   var adminToken = document.getElementById("admin-token");
   var redeemBtn = document.getElementById("redeem-btn");
+  var resendBtn = document.getElementById("resend-btn");
   var redeemError = document.getElementById("redeem-error");
+  var adminOk = document.getElementById("admin-ok");
 
   var current = { code: null, sig: null };
 
@@ -22,8 +24,17 @@
     try { return new Date(d).toLocaleString("fr-FR"); } catch (e) { return d; }
   }
 
+  function emailLine(data) {
+    if (data.emailed === false) {
+      return '<dt>Email</dt><dd style="color:#B45309">⚠ non envoyé</dd>';
+    }
+    return '<dt>Email</dt><dd>envoyé</dd>';
+  }
+
   function render(data) {
     stateEl.className = "verify-card";
+    if (adminOk) adminOk.hidden = true;
+    if (redeemError) redeemError.hidden = true;
     var html = "";
     if (data.status === "valid") {
       stateEl.classList.add("verify-ok");
@@ -33,9 +44,12 @@
         '<dt>Vol</dt><dd>' + esc(data.flightName) + '</dd>' +
         '<dt>Bénéficiaire</dt><dd>' + esc(data.recipientName || "—") + '</dd>' +
         '<dt>Émis le</dt><dd>' + fmtDate(data.createdAt) + '</dd>' +
+        emailLine(data) +
         '<dt>Code</dt><dd>' + esc(current.code) + '</dd>' +
         '</dl>';
       adminZone.hidden = false;
+      redeemBtn.hidden = false;
+      resendBtn.hidden = false;
     } else if (data.status === "used") {
       stateEl.classList.add("verify-used");
       html =
@@ -46,7 +60,9 @@
         '<dt>Utilisé le</dt><dd>' + fmtDate(data.redeemedAt) + '</dd>' +
         '<dt>Code</dt><dd>' + esc(current.code) + '</dd>' +
         '</dl>';
-      adminZone.hidden = true;
+      adminZone.hidden = false;   // accès au renvoi d'email même si utilisé
+      redeemBtn.hidden = true;    // mais pas de re-validation
+      resendBtn.hidden = false;
     } else {
       stateEl.classList.add("verify-bad");
       html =
@@ -110,11 +126,17 @@
     if (saved) adminToken.value = saved;
   } catch (e) {}
 
+  function adminTokenValue() {
+    var token = adminToken.value.trim();
+    if (token) { try { localStorage.setItem("tp_admin_token", token); } catch (e) {} }
+    return token;
+  }
+
   redeemBtn.addEventListener("click", function () {
     redeemError.hidden = true;
-    var token = adminToken.value.trim();
+    if (adminOk) adminOk.hidden = true;
+    var token = adminTokenValue();
     if (!token) { adminToken.focus(); return; }
-    try { localStorage.setItem("tp_admin_token", token); } catch (e) {}
 
     redeemBtn.disabled = true;
     var original = redeemBtn.textContent;
@@ -141,6 +163,40 @@
         redeemError.hidden = false;
         redeemBtn.disabled = false;
         redeemBtn.textContent = original;
+      });
+  });
+
+  resendBtn.addEventListener("click", function () {
+    redeemError.hidden = true;
+    if (adminOk) adminOk.hidden = true;
+    var token = adminTokenValue();
+    if (!token) { adminToken.focus(); return; }
+
+    resendBtn.disabled = true;
+    var original = resendBtn.textContent;
+    resendBtn.textContent = "Envoi…";
+
+    fetch("/api/resend", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ code: current.code, s: current.sig, token: token }),
+    })
+      .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
+      .then(function (res) {
+        resendBtn.disabled = false;
+        resendBtn.textContent = original;
+        if (res.ok && res.d && res.d.ok) {
+          if (adminOk) { adminOk.textContent = "Email renvoyé à " + (res.d.to || "l'acheteur") + "."; adminOk.hidden = false; }
+        } else {
+          redeemError.textContent = (res.d && res.d.error) || "Échec de l'envoi.";
+          redeemError.hidden = false;
+        }
+      })
+      .catch(function () {
+        resendBtn.disabled = false;
+        resendBtn.textContent = original;
+        redeemError.textContent = "Connexion impossible. Réessayez.";
+        redeemError.hidden = false;
       });
   });
 })();

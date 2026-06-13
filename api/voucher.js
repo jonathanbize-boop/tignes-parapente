@@ -14,7 +14,7 @@ export default async function handler(req, res) {
   try {
     await ensureSchema();
     const rows = await sql`
-      SELECT code, flight_name, recipient_name, status, created_at, redeemed_at
+      SELECT code, flight_name, recipient_name, status, created_at, redeemed_at, emailed
       FROM vouchers WHERE code = ${code}
     `;
     if (rows.length === 0) {
@@ -28,6 +28,7 @@ export default async function handler(req, res) {
       recipientName: v.recipient_name,
       createdAt: v.created_at,
       redeemedAt: v.redeemed_at,
+      emailed: v.emailed,
     });
   } catch (e) {
     console.error('voucher', e);

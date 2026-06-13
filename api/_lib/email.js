@@ -29,29 +29,38 @@ export async function sendVoucherEmail({ to, recipientName, flightName, code, am
       </div>
     </div>`;
 
-  await resend.emails.send({
+  // Email à l'acheteur (critique : une erreur ici est propagée pour être tracée).
+  const sent = await resend.emails.send({
     from,
     to,
     subject: `Votre bon cadeau Tignes Parapente — ${flightName}`,
     html,
     attachments,
   });
+  if (sent && sent.error) {
+    throw new Error(sent.error.message || JSON.stringify(sent.error));
+  }
 
+  // Copie à l'entreprise (best-effort : ne bloque jamais le circuit).
   const biz = process.env.BUSINESS_EMAIL;
   if (biz) {
-    await resend.emails.send({
-      from,
-      to: biz,
-      subject: `Nouveau bon vendu — ${code} (${flightName})`,
-      html: `<p>Nouveau bon cadeau vendu.</p>
-             <ul>
-               <li>Code : <strong>${code}</strong></li>
-               <li>Vol : ${flightName}</li>
-               <li>Bénéficiaire : ${recipientName || '—'}</li>
-               <li>Acheteur : ${to}</li>
-               <li>Montant : ${euros(amount)}</li>
-             </ul>`,
-      attachments,
-    });
+    try {
+      await resend.emails.send({
+        from,
+        to: biz,
+        subject: `Nouveau bon vendu — ${code} (${flightName})`,
+        html: `<p>Nouveau bon cadeau vendu.</p>
+               <ul>
+                 <li>Code : <strong>${code}</strong></li>
+                 <li>Vol : ${flightName}</li>
+                 <li>Bénéficiaire : ${recipientName || '—'}</li>
+                 <li>Acheteur : ${to}</li>
+                 <li>Montant : ${euros(amount)}</li>
+               </ul>`,
+        attachments,
+      });
+    } catch (e) {
+      console.error('Copie entreprise non envoyée:', e?.message || e);
+    }
   }
 }
