@@ -582,16 +582,14 @@ h3 { font-size: clamp(1.35rem, 2.6vw, 1.8rem); }
   .mobile-cta .btn { font-size: 1.05rem; }
   body { padding-bottom: 4.8rem; }
 
-  /* Héro plus aéré, un seul bouton, pas de collision avec la barre du bas */
-  .hero { min-height: 90svh; }
-  .hero-content { padding-block: 5.5rem 6.5rem; gap: 1.05rem; }
+  /* Héro épuré : pas de bouton (les vols sont juste en dessous + barre Appeler/Réserver) */
+  .hero { min-height: 80svh; }
+  .hero-content { padding-block: 5rem 5.5rem; gap: 1rem; }
   .hero h1, .page-hero h1 { font-size: 2.6rem; }
   .hero .lead { font-size: 1.02rem; }
-  .hero-badges { gap: .4rem; }
+  .hero-badges { gap: .4rem; margin-top: .2rem; }
   .chip { font-size: .82rem; padding: .34rem .75rem; }
-  .hero-ctas { flex-direction: column; align-items: stretch; gap: .65rem; width: 100%; max-width: 21rem; margin-top: .2rem; }
-  .hero-ctas .btn { width: 100%; }
-  .hero-ctas .btn-ghost-light { display: none; } /* "Offrir un vol" reste accessible via le menu, la section cadeau et le pied de page */
+  .hero-ctas { display: none; } /* boutons accessibles via la barre du bas, le menu et la section cadeau */
   .hero-scroll { display: none; }
 
   /* Pages intérieures : héro un peu plus court */
