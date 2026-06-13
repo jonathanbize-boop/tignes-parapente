@@ -75,7 +75,15 @@
       <nav class="main-nav" id="main-nav" aria-label="Navigation principale">
         <ul>
           <li><a href="index.html">Accueil</a></li>
-          <li><a href="index.html#vols" aria-current="page">Nos vols</a></li>
+          <li class="has-submenu">
+            <a href="index.html#vols" aria-current="page">Nos vols<svg class="caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a>
+            <ul class="submenu">
+              <li><a href="vol-decouverte.html">Vol Découverte <span>100&nbsp;€</span></a></li>
+              <li><a href="vol-sensation.html" aria-current="page">Vol Sensation <span>110&nbsp;€</span></a></li>
+              <li><a href="vol-enfant.html">Vol Spécial Enfant <span>95&nbsp;€</span></a></li>
+              <li><a href="vol-groupe.html">Vol Groupe <span>100&nbsp;€/pers</span></a></li>
+            </ul>
+          </li>
           <li><a href="bon-cadeau.html">Bon cadeau</a></li>
           <li><a href="videos.html">Vidéos</a></li>
           <li><a href="faq.html">FAQ</a></li>
