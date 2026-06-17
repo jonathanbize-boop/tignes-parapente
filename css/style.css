@@ -671,16 +671,23 @@ h3 { font-size: clamp(1.35rem, 2.6vw, 1.8rem); }
 }
 .altimeter .alt-value { font-size: 1.3rem; color: var(--sun); line-height: 1; font-variant-numeric: tabular-nums; }
 .altimeter .alt-label { font-size: .6rem; letter-spacing: .22em; text-transform: uppercase; opacity: .8; font-style: normal; font-family: var(--font-body); }
+/* Sur iOS Safari, background-attachment:fixed est cassé : fond invisible ou glitchy */
+@media (max-width: 64rem) {
+  .section-dark { background-attachment: scroll; }
+}
+
 @media (max-width: 48rem) {
-  /* Sur mobile : compact, en bas à gauche, juste au-dessus du bouton "Appeler" */
+  /* Sur mobile : compact, en bas à gauche, juste au-dessus du bouton "Appeler" si présent */
   .altimeter {
-    top: auto; bottom: calc(env(safe-area-inset-bottom) + 5.2rem); left: .75rem;
+    top: auto; bottom: calc(env(safe-area-inset-bottom) + 1.1rem); left: .75rem;
     grid-auto-flow: column; align-items: baseline; gap: .35rem;
     padding: .35rem .6rem; border-radius: .65rem;
     background: rgba(11,27,43,.72);
   }
   .altimeter .alt-value { font-size: 1rem; }
   .altimeter .alt-label { font-size: .52rem; letter-spacing: .14em; }
+  /* Remonte au-dessus de la barre CTA quand elle est présente */
+  body:has(.mobile-cta) .altimeter { bottom: calc(env(safe-area-inset-bottom) + 5.2rem); }
 }
 
 /* ---------- CTA mobile sticky ---------- */
@@ -694,7 +701,7 @@ h3 { font-size: clamp(1.35rem, 2.6vw, 1.8rem); }
 @media (max-width: 48rem) {
   .mobile-cta { display: flex; }
   .mobile-cta .btn { font-size: 1.05rem; }
-  body { padding-bottom: 4.8rem; }
+  body:has(.mobile-cta) { padding-bottom: 4.8rem; }
 
   /* Héro plein écran : texte calé en haut pour laisser les visages bien visibles au centre */
   .hero { min-height: 100svh; align-items: start; }
