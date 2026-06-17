@@ -244,9 +244,15 @@ h3 { font-size: clamp(1.35rem, 2.6vw, 1.8rem); }
   /* Sous-menu déplié sous "Nos vols" */
   .caret { display: none; }
   .main-nav .submenu {
-    position: static; transform: none; opacity: 1; visibility: visible; pointer-events: auto;
+    position: static; transform: none;
     background: transparent; box-shadow: none; min-width: 0;
     padding: .15rem 0 .5rem; margin: 0; gap: 0; display: grid;
+  }
+  /* Visible/cliquable uniquement quand le burger est ouvert.
+     Sinon (menu fermé) le sous-menu hérite de opacity:0 / visibility:hidden / pointer-events:none
+     du parent .main-nav, ce qui évite des liens invisibles mais cliquables par-dessus la page. */
+  .main-nav.is-open .submenu {
+    opacity: 1; visibility: visible; pointer-events: auto;
   }
   .main-nav .submenu a {
     justify-content: center; gap: .4rem;
