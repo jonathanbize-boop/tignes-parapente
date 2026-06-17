@@ -40,7 +40,7 @@
 /* ---------- Reset ---------- */
 *, *::before, *::after { box-sizing: border-box; }
 * { margin: 0; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 5.25rem; }
 body {
   font-family: var(--font-body);
   font-size: 1.0625rem;
